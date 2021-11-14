@@ -1,5 +1,7 @@
 kubectl apply -f cron.yaml 
 # when ready
-kubectl delete cronjob hello-time
+kubectl get pods -n cron -watch
+
+#kubectl delete cronjob hello-time
 
 
