@@ -1,12 +1,22 @@
-  schedule: "*/3 * * * *" ## every three minutes
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-time
+spec:
+  schedule: "*/2 * * * *"
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 5  
   jobTemplate:
     spec:
       template:
         spec:
+          activeDeadlineSeconds: 120
           containers:
-          - name: python
-            image: dps3ven/spam-deleter:latest ## change
+          - name: hello-time
+            image: dps3ven/hello-time:latest
             imagePullPolicy: IfNotPresent
-          restartPolicy: OnFailure
+            ports:
+            - containerPort: 5000
+              hostPort: 5000
+          restartPolicy: Never
+
