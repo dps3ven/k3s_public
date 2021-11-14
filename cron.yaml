@@ -1,0 +1,12 @@
+  schedule: "*/3 * * * *" ## every three minutes
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 5  
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: python
+            image: dps3ven/spam-deleter:latest ## change
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
